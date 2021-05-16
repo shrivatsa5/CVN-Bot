@@ -1,0 +1,16 @@
+{
+  "name": "cvn-bot",
+  "version": "1.0.0",
+  "description": "Bot helps users regarding vaccine supply and availability.",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Varun Hegde, Shrivatsa Hegde",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.5.3",
+    "dotenv": "^9.0.2",
+    "nodemon": "^2.0.7"
+  }
+}
