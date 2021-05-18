@@ -7,15 +7,15 @@ let userSchema = new mongoose.Schema({
   },
   state: {
     type: String,
-    default: '',
+    default: null,
   },
   district: {
     type: String,
-    default: '',
+    default: null,
   },
   age: {
     type: Number,
-    default: 18,
+    default: 0,
   },
 });
 module.exports = mongoose.model('User', userSchema, 'User');
