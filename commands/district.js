@@ -47,12 +47,26 @@ let dstCmd={
          {
            district_id=state_document.district_id
          }
-         let Url="https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=<DiD>&date="+args[0]
-         Url=Url.replace('<DiD>',district_id.toString())               
+         let query_date="";
+        
+         if(!args[0])
+           {      
+        let today = new Date();        
+        let dd = String(today.getDate()).padStart(2, '0');
+        let mm = String(today.getMonth() + 1).padStart(2, '0'); 
+        let yyyy = today.getFullYear();        
+        today = dd + '-' + mm + '-' + yyyy;
+        query_date=today
+          }
+           else query_date=args[0]                
+
+         let Url="https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByDistrict?district_id=<DiD>&date="+query_date
+         Url=Url.replace('<DiD>',district_id.toString())    
+             console.log(Url)
          const res=await got(Url,{json:true})
          if(res.body.sessions.length==0)message.channel.send("No slots found")
          
-         let centre_name,from,to
+        
          res.body.sessions.forEach(async element=>{
            msg={"Name":element.name, 
            "Vaccine":element.vaccine,           

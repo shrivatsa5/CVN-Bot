@@ -14,7 +14,8 @@ let regCmd = {
       message.channel.send('profile creation is unsuccesfull');
       return;
     }
-    let state = q0ans.first().content;
+    let state = q0ans.first().content.toLowerCase();
+    
 
     //asking query1 about district
     message.channel.send('Enter your district please');
@@ -23,7 +24,8 @@ let regCmd = {
       message.channel.send('profile creation is unsuccesfull');
       return;
     }
-    let dist = q1ans.first().content;
+    let dist = q1ans.first().content.toLowerCase();
+    
 
     //asking query2 about age
     message.channel.send('Enter your age please');
@@ -41,10 +43,10 @@ let regCmd = {
       age: age,
     });
     try {
-      console.log(newUser);
+     
       let user = await newUser.save();
-      console.log(user);
-      console.log('new user saved');
+      //console.log(user);
+      //console.log('new user saved');
       message.channel.send('profile has been created');
     } catch (error) {
       message.channel.send('error while creating profile');
