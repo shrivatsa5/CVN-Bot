@@ -11,6 +11,7 @@ let dstCmd={
     try {
       const user_name=message.author.username
         let document= await User.findOne({name:user_name})
+        console.log(document)
     
        if(!document)  message.reply('Not registered. Kindly register')
        
@@ -71,10 +72,8 @@ let dstCmd={
            msg={"Name":element.name, 
            "Vaccine":element.vaccine,           
         "Slots": element.slots,
-      }
-               
+      }               
            message.channel.send(JSON.stringify(msg))
-
 
          })
         }
@@ -82,6 +81,7 @@ let dstCmd={
     } catch (error) {
       
       console.log(error);
+      message.channel.send("Something went wrong.Please try again")
     }
   }
   }

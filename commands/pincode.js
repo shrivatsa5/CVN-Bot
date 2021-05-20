@@ -30,7 +30,7 @@ try{
     
     const response=await got(url,{json:true})
     
-    if(response.body.sessions.size==0)
+    if(response.body.sessions.length==0)
     message.channel.send("No slots available")
     else{
       response.body.sessions.forEach(async element=>{
