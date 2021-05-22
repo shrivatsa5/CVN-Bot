@@ -11,7 +11,7 @@ let resetmyinfoCmd = {
 
     //asking which personal info that user wants to change
     message.channel.send(
-      'Which personal info you want to edit ?\n It should be one amoung these.\n 1. state\n2. district\n 3. age'
+      'Which personal info you want to edit ?\n It should be one amoung these.\n ***state***\n ***district***\n ***age***'
     );
     const q0ans = await message.channel.awaitMessages(filter, { time: 5000 });
     if (q0ans.size == 0) {
