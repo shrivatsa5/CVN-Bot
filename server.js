@@ -2,6 +2,8 @@ const fs = require('fs');
 require('dotenv').config('./env');
 //Database configured and connected
 require('./Database/dbconfig');
+//Get Database utility functions
+const { checkForReg } = require('./Database/dbutilityfuncs');
 
 const Discord = require('discord.js');
 let bot = new Discord.Client();
@@ -19,7 +21,7 @@ for (const file of commandFiles) {
   bot.commands.set(command.name, command);
 }
 
-bot.on('message', (message) => {
+bot.on('message', async (message) => {
   if (!message.content.startsWith(PREFIX) || message.author.bot) {
     return;
   }
@@ -29,6 +31,20 @@ bot.on('message', (message) => {
 
   if (!bot.commands.has(command)) {
     message.reply('Command not found !');
+    return;
+  }
+
+  //checking whether user registerer before using commands except register
+  let isUserRegistered = await checkForReg(message.author.username);
+  if (!isUserRegistered && command != 'register') {
+    message.reply('You need to register first before using this command');
+    return;
+  }
+
+  if (isUserRegistered && command == 'register') {
+    message.reply(
+      'You cant register twice. you can reset your personal information using ***resetmyinfo*** command'
+    );
     return;
   }
 
@@ -46,3 +62,6 @@ bot.on('ready', () => {
 });
 
 bot.login(TOKEN);
+
+module.exports = bot;
+require('./schedule');

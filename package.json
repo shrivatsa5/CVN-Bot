@@ -11,7 +11,9 @@
   "dependencies": {
     "discord.js": "^12.5.3",
     "dotenv": "^9.0.2",
+    "got": "^11.8.2",
     "mongoose": "^5.12.9",
+    "node-cron": "^3.0.0",
     "nodemon": "^2.0.7"
   }
 }

@@ -5,6 +5,10 @@ let userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  userid: {
+    type: String,
+    required: true,
+  },
   state: {
     type: String,
     default: null,
@@ -17,9 +21,9 @@ let userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  pincode:{
-    type:String,
-    default:''
-  }
+  pincode: {
+    type: String,
+    default: '',
+  },
 });
 module.exports = mongoose.model('User', userSchema, 'User');
