@@ -11,6 +11,7 @@ let dstCmd = {
       const user_name = message.author.username;
       let document = await User.findOne({ name: user_name });
       console.log(document);
+      let user_age=document.age
 
       if (!document) message.reply('Not registered. Kindly register');
       else {
@@ -72,13 +73,18 @@ let dstCmd = {
         if (res.sessions.length == 0) message.channel.send('No slots found');
 
         res.sessions.forEach(async (element) => {
-          msg = {
-            Name: element.name,
-            Vaccine: element.vaccine,
-            Slots: element.slots,
-          };
-          message.channel.send(JSON.stringify(msg));
-        });
+         if(element.min_age_limit<=user_age){
+          message.channel.send(
+           
+            "\n"+"\n"+
+            "***Name***"+"\t"+"     "+":"+"\t"+ element.name +"\n"
+             +
+           "***Vaccine***"+"\t" +" "+":"+"\t"+ element.vaccine +"\n"
+              +
+           "***Slots***" +"\t"+"       "+":"+"\t"+ element.slots + "\n" )
+           
+        }})
+         
       }
     } catch (error) {
       console.log(error);

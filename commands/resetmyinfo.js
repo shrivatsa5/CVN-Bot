@@ -13,7 +13,7 @@ let resetmyinfoCmd = {
     message.channel.send(
       'Which personal info you want to edit ?\n It should be one amoung these.\n ***state***\n ***district***\n ***age***'
     );
-    const q0ans = await message.channel.awaitMessages(filter, { time: 5000 });
+    const q0ans = await message.channel.awaitMessages(filter, { time: 15000 });
     if (q0ans.size == 0) {
       message.channel.send('profile reset is unsuccesfull');
       return;
@@ -26,7 +26,7 @@ let resetmyinfoCmd = {
 
     //asking which user to send value which they want to edit
     message.channel.send('send the the new personal Info value');
-    const q1ans = await message.channel.awaitMessages(filter, { time: 5000 });
+    const q1ans = await message.channel.awaitMessages(filter, { time: 15000 });
     if (q1ans.size == 0) {
       message.channel.send('profile reset is unsuccesfull');
       return;

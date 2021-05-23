@@ -1,3 +1,4 @@
+const User = require('../Database/users');
 const got = require('got');
 
 let pincode_cmd = {
@@ -7,20 +8,25 @@ let pincode_cmd = {
   async execute(message, args) {
     let name = message.author.username;
     const filter = (m) => m.author.id == message.author.id;
-
-    //asking query0 about state
-
+    let docs=await User.findOne({name:name})
+    let user_age=docs.age
+    let pinCode;
+    if(docs.pincode!="")pinCode=docs.pincode
+    else{
+    
     message.channel.send('Enter your  pincode');
-    const q0ans = await message.channel.awaitMessages(filter, { time: 5000 });
+    const q0ans = await message.channel.awaitMessages(filter, { time: 15000 });
     console.log(q0ans.size);
     if (q0ans.size == 0) {
       message.channel.send('Time exceeded!! You have start again');
       return;
     }
-    let pinCode = q0ans.first().content;
+     pinCode = q0ans.first().content;
+     
+  }
 
-    message.channel.send('Enter date ');
-    const q1ans = await message.channel.awaitMessages(filter, { time: 10000 });
+    message.channel.send('Enter date (dd-mm-yyyy) ');
+    const q1ans = await message.channel.awaitMessages(filter, { time: 15000 });
     if (q1ans.size == 0) {
       message.channel.send('enter date');
       return;
@@ -40,13 +46,17 @@ let pincode_cmd = {
         message.channel.send('No slots available');
       else {
         response.sessions.forEach(async (element) => {
-          msg = {
-            Name: element.name,
-            Vaccine: element.vaccine,
-            Slots: element.slots,
-          };
-
-          message.channel.send(JSON.stringify(msg));
+          if(element.min_age_limit<=user_age){
+            message.channel.send(
+             
+            "\n"+"\n"+
+            "***Name***"+"\t"+"     "+":"+"\t"+ element.name +"\n"
+             +
+           "***Vaccine***"+"\t" +" "+":"+"\t"+ element.vaccine +"\n"
+              +
+           "***Slots***" +"\t"+"       "+":"+"\t"+ element.slots + "\n" )
+             
+          }
         });
       }
     } catch (err) {

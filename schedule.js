@@ -3,7 +3,7 @@ var cron = require('node-cron');
 const got = require('got');
 const bot = require('./server');
 
-cron.schedule('*/1 * * * *', async () => {
+cron.schedule('*/60 * * * *', async () => {
   try {
     //getting todays date and converting it to specified format
     let today = new Date();
@@ -64,7 +64,7 @@ cron.schedule('*/1 * * * *', async () => {
 
     const collectInfo = (infoArr) => {
       let infoStr = String('***solts are available hurray***');
-      let importantProp = ['name', 'address', 'date', 'fee'];
+      let importantProp = ['name', 'address', 'date','vaccine'];
       infoArr.forEach((infoObj) => {
         // importantPropObject = {};
         for (let prop in infoObj) {
@@ -75,13 +75,14 @@ cron.schedule('*/1 * * * *', async () => {
         }
         console.log(infoObj);
         infoStr += '\n';
-        infoStr += JSON.stringify(infoObj);
+        infoStr += "***Name***"+"     "+":"+"\t"+infoObj.name +"\n"+"***vaccine***"+"  "+":"+"\t"+infoObj.vaccine+"\n";
       });
       return infoStr;
     };
     for (userHourlyInfo of subscribers_arr) {
       userDmChannel = await bot.users.fetch(userHourlyInfo[0].userid, false);
       userDmChannel.send(collectInfo(userHourlyInfo[1]));
+      userDmChannel.send("Follow this link and book your slot" +"\n"+"https://www.cowin.gov.in/home")
     }
   } catch (err) {
     console.log(err);

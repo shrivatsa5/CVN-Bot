@@ -9,11 +9,20 @@
   "author": "Varun Hegde, Shrivatsa Hegde",
   "license": "ISC",
   "dependencies": {
+    "discord-welcome": "^2.0.2",
     "discord.js": "^12.5.3",
     "dotenv": "^9.0.2",
     "got": "^11.8.2",
     "mongoose": "^5.12.9",
     "node-cron": "^3.0.0",
     "nodemon": "^2.0.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shrivatsa5/CVN-Bot.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shrivatsa5/CVN-Bot/issues"
+  },
+  "homepage": "https://github.com/shrivatsa5/CVN-Bot#readme"
 }

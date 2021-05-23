@@ -8,10 +8,13 @@ const { checkForReg } = require('./Database/dbutilityfuncs');
 const Discord = require('discord.js');
 let bot = new Discord.Client();
 bot.commands = new Discord.Collection();
-
+const welcome=require("./welcome")
 //Getting essential environment variables;
 const TOKEN = process.env.TOKEN;
 const PREFIX = process.env.PREFIX;
+
+
+
 
 //reading all the command files of command folder and registering each command
 const commandFiles = fs.readdirSync('./commands');
@@ -35,6 +38,18 @@ bot.on('message', async (message) => {
   }
 
   //checking whether user registerer before using commands except register
+
+  if(command=="help")
+  {
+    try {
+      bot.commands.get(command).execute(message, args);
+    } catch (error) {
+      console.error(error);
+      message.reply('there was an error trying to execute that command!');
+    }
+    return;
+
+  }
   let isUserRegistered = await checkForReg(message.author.username);
   if (!isUserRegistered && command != 'register') {
     message.reply('You need to register first before using this command');
@@ -62,6 +77,12 @@ bot.on('ready', () => {
 });
 
 bot.login(TOKEN);
+
+
+
+
+welcome(bot)
+
 
 module.exports = bot;
 require('./schedule');
