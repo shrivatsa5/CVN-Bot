@@ -27,6 +27,6 @@ BFH/rec7l5EeMXUMwCpAa/2021
     "node-cron": "^3.0.0",
     "nodemon": "^2.0.7"
 ## How to configure
- enter npm install
+  npm install
 ## How to Run
-enter npm start
+ npm start
